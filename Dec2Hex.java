@@ -1,6 +1,5 @@
 
 import java.util.Scanner;
-
 class Dec2Hex
 {
 public static int Arg1;
@@ -19,7 +18,7 @@ public static int Arg1;
             num= num/16;
         }
 
-        System.out.println("Hexadecimal representation is: " + hexadecimal);
+        System.out.println("AHexadecimal representation is: " + hexadecimal);
 
     }
 }
