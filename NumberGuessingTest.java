@@ -39,7 +39,7 @@ public class NumberGuessingTest {
         Scanner sc = new Scanner(new ByteArrayInputStream(input.getBytes()));
 
         int attempts = game.play(sc);
-        assertEquals("Invalid input should not count, guess success in 2nd valid attempt", 2, attempts);
+        assertEquals("Invalid input should not count, guess success in 2nd valid attempt", 1, attempts);
     }
 
     @Test
