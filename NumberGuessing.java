@@ -1,6 +1,6 @@
 // NumberGuessing.java
 import java.util.Scanner;
-import java.util.logging.logger;
+import java.util.logging.Logger;
 
 public class NumberGuessing {
 
