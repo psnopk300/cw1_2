@@ -48,7 +48,7 @@ private static final Logger logger = Logger.getLogger(NumberGuessing.class.getNa
         } else if (guess < number) {
             logger.info("The number is greater than " + guess);
         } else {
-            logger.info("The number is less than " + guess);
+            logger.info(String.format("The number is less than %d", guess));
         }
     }
 
