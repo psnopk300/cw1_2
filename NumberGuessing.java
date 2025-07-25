@@ -4,6 +4,8 @@ import java.util.logging.Logger;
 
 public class NumberGuessing {
 
+private static final Logger logger = Logger.getLogger(NumberGuessing.class.getName());
+
     private int number;
     private int maxAttempts;
 
