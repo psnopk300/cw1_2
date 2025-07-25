@@ -56,7 +56,9 @@ private static final Logger logger = Logger.getLogger(NumberGuessing.class.getNa
         }
     }
 
-    logger.info("You've exhausted all attempts. The correct number was: " + number);
+    if (logger.isLoggable(Level.INFO)) {
+    logger.info(String.format("You've exhausted all attempts. The correct number was: %d", number));
+}
     return attemptsUsed;
 }
 
