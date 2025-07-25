@@ -1,3 +1,5 @@
+package com.example.numberguessing;
+
 // NumberGuessing.java
 import java.util.Scanner;
 import java.util.logging.Logger;
