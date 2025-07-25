@@ -20,33 +20,36 @@ public class NumberGuessing {
 
     // Game method which reads from scanner and returns number of attempts used
     public int play(Scanner sc) {
-        System.out.println("A number is chosen between 1 and 100.");
-        System.out.println("You have " + maxAttempts + " attempts to guess the correct number.");
+    System.out.println("A number is chosen between 1 and 100.");
+    System.out.println("You have " + maxAttempts + " attempts to guess the correct number.");
 
-        for (int i = 0; i < maxAttempts; i++) {
-            System.out.print("Enter your guess: ");
+    int attemptsUsed = 0;
 
-            if (!sc.hasNextInt()) {
-                System.out.println("Invalid input. Please enter an integer.");
-                sc.next();  // consume invalid input
-                i--;        // don't count invalid attempt
-                continue;
-            }
+    while (attemptsUsed < maxAttempts) {
+        System.out.print("Enter your guess: ");
 
-            int guess = sc.nextInt();
-
-            if (guess == number) {
-                System.out.println("Congratulations! You guessed the correct number.");
-                return i + 1; // number of attempts used
-            } else if (guess < number) {
-                System.out.println("The number is greater than " + guess);
-            } else {
-                System.out.println("The number is less than " + guess);
-            }
+        if (!sc.hasNextInt()) {
+            System.out.println("Invalid input. Please enter an integer.");
+            sc.next();  // consume invalid input
+            continue;   // don't increase attemptsUsed
         }
-        System.out.println("You've exhausted all attempts. The correct number was: " + number);
-        return maxAttempts;
+
+        int guess = sc.nextInt();
+        attemptsUsed++;
+
+        if (guess == number) {
+            System.out.println("Congratulations! You guessed the correct number.");
+            return attemptsUsed;
+        } else if (guess < number) {
+            System.out.println("The number is greater than " + guess);
+        } else {
+            System.out.println("The number is less than " + guess);
+        }
     }
+
+    System.out.println("You've exhausted all attempts. The correct number was: " + number);
+    return attemptsUsed;
+}
 
     // main method to run game normally
     public static void main(String[] args) {
