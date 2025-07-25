@@ -17,20 +17,35 @@ public class Dec2Hex {
         return hexadecimal;
     }
 
+    // ✅ New testable method
+    public String validateAndConvert(String input) {
+        if (input == null || input.trim().isEmpty()) {
+            return "Error: No input provided. Please provide an integer.";
+        }
+
+        try {
+            int number = Integer.parseInt(input.trim());
+            return convert(number);
+        } catch (NumberFormatException e) {
+            return "Error: Invalid input. '" + input + "' is not a valid integer.";
+        }
+    }
+
     public static void main(String[] args) {
+        Dec2Hex converter = new Dec2Hex();
+
         if (args.length == 0) {
             System.err.println("Error: No input provided. Please provide an integer.");
             return;
         }
 
-        try {
-            int num = Integer.parseInt(args[0]);
-            System.out.println("Converting the Decimal Value " + num + " to Hex...");
-            Dec2Hex converter = new Dec2Hex();
-            String result = converter.convert(num);
+        String result = converter.validateAndConvert(args[0]);
+
+        if (result.startsWith("Error:")) {
+            System.err.println(result);
+        } else {
+            System.out.println("Converting the Decimal Value " + args[0] + " to Hex...");
             System.out.println("Hexadecimal representation is: " + result);
-        } catch (NumberFormatException e) {
-            System.err.println("Error: Invalid input. '" + args[0] + "' is not a valid integer.");
         }
     }
 }
