@@ -25,7 +25,7 @@ private static final Logger logger = Logger.getLogger(NumberGuessing.class.getNa
     // Game method which reads from scanner and returns number of attempts used
     public int play(Scanner sc) {
     if (logger.isLoggable(Level.INFO)) {
-    logger.info(String.format("A number is chosen between 1 and 100."));
+    logger.info("A number is chosen between 1 and 100.");
     logger.info(String.format("You have %d attempts to guess the correct number.", maxAttempts));
     }
     int attemptsUsed = 0;
