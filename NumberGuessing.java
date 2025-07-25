@@ -24,15 +24,15 @@ private static final Logger logger = Logger.getLogger(NumberGuessing.class.getNa
     // Game method which reads from scanner and returns number of attempts used
     public int play(Scanner sc) {
     logger.info("A number is chosen between 1 and 100.");
-    System.out.println("You have " + maxAttempts + " attempts to guess the correct number.");
+    logger.info("You have " + maxAttempts + " attempts to guess the correct number.");
 
     int attemptsUsed = 0;
 
     while (attemptsUsed < maxAttempts) {
-        System.out.print("Enter your guess: ");
+        logger.info("Enter your guess: ");
 
         if (!sc.hasNextInt()) {
-            System.out.println("Invalid input. Please enter an integer.");
+            logger.warning("Invalid input. Please enter an integer.");
             sc.next();  // consume invalid input
             continue;   // don't increase attemptsUsed
         }
@@ -41,16 +41,16 @@ private static final Logger logger = Logger.getLogger(NumberGuessing.class.getNa
         attemptsUsed++;
 
         if (guess == number) {
-            System.out.println("Congratulations! You guessed the correct number.");
+            logger.info("Congratulations! You guessed the correct number.");
             return attemptsUsed;
         } else if (guess < number) {
-            System.out.println("The number is greater than " + guess);
+            logger.info("The number is greater than " + guess);
         } else {
-            System.out.println("The number is less than " + guess);
+            logger.info("The number is less than " + guess);
         }
     }
 
-    System.out.println("You've exhausted all attempts. The correct number was: " + number);
+    logger.info("You've exhausted all attempts. The correct number was: " + number);
     return attemptsUsed;
 }
 
