@@ -20,7 +20,7 @@ public class Dec2Hex {
     // ✅ New testable method
     public String validateAndConvert(String input) {
         if (input == null || input.trim().isEmpty()) {
-            return "lError: No input provided. Please provide an integer.";
+            return "Error: No input provided. Please provide an integer.";
         }
 
         try {
