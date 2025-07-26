@@ -1,50 +1,75 @@
-// Java Program to demonstrates the Number guessing game
+// NumberGuessing.java
 import java.util.Scanner;
+import java.util.logging.Logger;
+import java.util.logging.Level;
+import java.util.Random;
+
 public class NumberGuessing {
 
- public static void guessingNumberGame()
- {
- Scanner sc = new Scanner(System.in);
- // Generate a random number between 1 and 100
- int number = 1 + (int)(100 * Math.random());
+    private static final Logger logger = Logger.getLogger(NumberGuessing.class.getName());
 
- // Number of attempts
- int K = 5;
- System.out.println(
- "A number is chosen between 1 and 100.");
- System.out.println(
- "You have " + K
- + " attempts to guess the correct number.");
- // Loop for K attempts
- for (int i = 0; i < K; i++) {
- System.out.print("Enter your guess: ");
- int guess = sc.nextInt();
- // Check conditions
- if (guess == number) {
- System.out.println(
- " Congratulations! You guessed the correct number.");
- sc.close();
+    private int number;
+    private int maxAttempts;
 
- // Exit function if guessed correctly
- return;
- }
- else if (guess < number) {
- System.out.println(
- " The number is greater than " + guess);
- }
- else {
- System.out.println(
- " The number is less than " + guess);
- }
- }
- // If the user runs out of attempts
- System.out.println(
- "You've exhausted all attempts. The correct number was: "
- + number);
- sc.close();
- }
- public static void main(String[] args)
- {
- guessingNumberGame();
- }
+    public NumberGuessing(int maxAttempts) {
+        this.maxAttempts = maxAttempts;
+        // random number between 1 and 100
+        Random rand = new Random();
+        this.number = 1 + rand.nextInt(100); // 1 to 100 inclusive
+    }
+
+    // For testing, allow injecting number:
+    public NumberGuessing(int maxAttempts, int number) {
+        this.maxAttempts = maxAttempts;
+        this.number = number;
+    }
+
+    // Game method which reads from scanner and returns number of attempts used
+    public int play(Scanner sc) {
+        if (logger.isLoggable(Level.INFO)) {
+            logger.info("A number is chosen between 1 and 100.");
+            logger.info(String.format("You have %d attempts to guess the correct number.", maxAttempts));
+        }
+int attemptsUsed = 0;
+        while (attemptsUsed < maxAttempts) {
+            logger.info("Enter your guess: ");
+
+            if (!sc.hasNextInt()) {
+                logger.warning("Invalid input. Please enter an integer.");
+                sc.next();  // consume invalid input
+                continue;   // don't increase attemptsUsed
+            }
+
+            int guess = sc.nextInt();
+            attemptsUsed++;
+
+            if (guess == number) {
+                logger.info("Congratulations! You guessed the correct number.");
+                return attemptsUsed;
+            } else if (guess < number) {
+                if (logger.isLoggable(Level.INFO)) {
+                    logger.info(String.format("The number is greater than %d", guess));
+                }
+            } else {
+                if (logger.isLoggable(Level.INFO)) {
+                    logger.info(String.format("The number is less than %d", guess));
+                }
+            }
+        }
+
+        if (logger.isLoggable(Level.INFO)) {
+            logger.info(String.format("You've exhausted all attempts. The correct number was: %d", number));
+        }
+        return attemptsUsed;
+   }
+
+    // main method to run game normally
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        NumberGuessing game = new NumberGuessing(5);
+        game.play(sc);
+        sc.close();
+    }
 }
+
+
